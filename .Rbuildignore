@@ -1,0 +1,15 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^dev$
+^docker-compose\.yml$
+^Dockerfile$
+^Makefile$
+^\.env\.example$
+^backups$
+^\.github$
+^README\.md$
+^\.dockerignore$
+^\.gitignore$
+^test_connection\.R$
+^check_status\.R$
+^\.here$

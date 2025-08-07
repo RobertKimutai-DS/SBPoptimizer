@@ -1,0 +1,33 @@
+default:
+  golem_name: SBPoptimizer
+  golem_version: 0.1.0
+  app_prod: no
+  db:
+    host: localhost
+    port: 5432
+    dbname: sbpoptimizer_dev
+    user: sbp_user
+    password: sbp_password_dev
+    pool_size: 5
+    pool_timeout: 60
+
+production:
+  app_prod: yes
+  db:
+    host: !expr Sys.getenv("DB_HOST", "localhost")
+    port: !expr as.integer(Sys.getenv("DB_PORT", "5433"))
+    dbname: !expr Sys.getenv("DB_NAME", "sbpoptimizer_prod")
+    user: !expr Sys.getenv("DB_USER", "sbp_user")
+    password: !expr Sys.getenv("DB_PASSWORD", "sbp_password_prod")
+    pool_size: 10
+    pool_timeout: 120
+
+testing:
+  db:
+    host: localhost
+    port: 5434
+    dbname: sbpoptimizer_test
+    user: sbp_user
+    password: sbp_password_test
+    pool_size: 3
+    pool_timeout: 30

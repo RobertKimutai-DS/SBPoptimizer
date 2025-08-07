@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres_dev:
+    image: postgres:15
+    container_name: sbpoptimizer_postgres_dev
+    environment:
+      POSTGRES_DB: sbpoptimizer_dev
+      POSTGRES_USER: sbp_user
+      POSTGRES_PASSWORD: sbp_password_dev
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./inst/sql:/docker-entrypoint-initdb.d
+    networks:
+      - sbp_network
+    restart: unless-stopped
+
+  postgres_prod:
+    image: postgres:15
+    container_name: sbpoptimizer_postgres_prod
+    environment:
+      POSTGRES_DB: sbpoptimizer_prod
+      POSTGRES_USER: sbp_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_PROD:-sbp_password_prod}
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./inst/sql:/docker-entrypoint-initdb.d
+    networks:
+      - sbp_network
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    container_name: sbpoptimizer_adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - sbp_network
+    depends_on:
+      - postgres_dev
+      - postgres_prod
+
+volumes:
+  postgres_dev_data:
+  postgres_prod_data:
+
+networks:
+  sbp_network:
+    driver: bridge

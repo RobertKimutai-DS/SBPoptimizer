@@ -1,0 +1,24 @@
+# Golem standard ignores
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+# Database and sensitive files
+.env
+*.log
+backups/
+.here
+
+# Docker volumes
+postgres_*_data/
+
+# Development files
+dev/test_*.R
+check_status.R
+test_connection.R
+
+# Package build files
+*.tar.gz
+*.Rcheck/
