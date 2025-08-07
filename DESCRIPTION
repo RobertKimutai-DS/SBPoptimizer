@@ -35,3 +35,5 @@ Suggests:
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://github.com/RobertKimutai-DS/SBPoptimizer
+BugReports: https://github.com/RobertKimutai-DS/SBPoptimizer/issues
